@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { MatomoTracker } from 'ngx-matomo';
 
 @Component({
   selector: 'app-example-bootstrap-prototype',
@@ -6,7 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./example-bootstrap-prototype.component.css']
 })
 
-export class ExampleBootstrapPrototypeComponent {
+export class ExampleBootstrapPrototypeComponent implements OnInit {
   current = 1;
   features = [
     { id: 1, name: 'Alerts', link: 'alerts' },
@@ -29,6 +30,15 @@ export class ExampleBootstrapPrototypeComponent {
 
   changeItem(item: any) {
     this.current = item.id;
+  }
+
+  constructor(
+    private matomoTracker: MatomoTracker
+  ) { }
+
+  ngOnInit() {
+    this.matomoTracker.setUserId('UserId');
+    this.matomoTracker.setDocumentTitle('ngx-Matomo Bootstrap components');
   }
 
 }
